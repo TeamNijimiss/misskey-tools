@@ -14,6 +14,7 @@ axios.defaults.validateStatus = (stat) => stat < 500;
 export const dataSource = createPostgresDataSource(config);
 
 (async () => {
+  await dataSource.initialize();
   (await import('./backend/services/worker.js')).default();
   (await import('./backend/server.js')).default();
 })();
