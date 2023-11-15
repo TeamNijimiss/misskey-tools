@@ -1,7 +1,8 @@
-import { initDb } from '../backend/services/db.js';
+import { createPostgresDataSource } from '../backend/services/db.js';
 import 'reflect-metadata';
+import { config } from '../config.js';
 
 (async () => {
-  await initDb();
-  (await import('./calculate-all-rating.worker')).default();
+  createPostgresDataSource(config);
+  await (await import('./calculate-all-rating.worker.js')).default();
 })();

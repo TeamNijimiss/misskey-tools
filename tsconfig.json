@@ -1,23 +1,36 @@
 {
 	"compilerOptions": {
-		"target": "es2021",
-		"module": "esnext",
-		"moduleResolution": "node",
+		"target": "ES2021",
+		"module": "nodenext",
+		"moduleResolution": "nodenext",
 		"outDir": "./built/",
 		"rootDir": "./src/",
 		"strict": true,
+        "strictNullChecks": true,
 		"strictPropertyInitialization": false,
 		"typeRoots": [
 				"node_modules/@types",
+				"node_modules",
 				"src/@types"
 		],
-		"esModuleInterop": true,
+    "types": [
+      "node",
+    ],
+    "esModuleInterop": true,
 		"experimentalDecorators": true,
 		"emitDecoratorMetadata": true,
 		"skipLibCheck": true,
+    "noImplicitAny": false,
 		"forceConsistentCasingInFileNames": true,
-		"resolveJsonModule": true
+		"resolveJsonModule": true,
+		"lib": [
+			"esnext"
+		]
 	},
+  "ts-node": {
+    "esm": true,
+    "experimentalSpecifierResolution": "node"
+  },
 	"exclude": [
 		"./migration",
 		"./src/frontend"

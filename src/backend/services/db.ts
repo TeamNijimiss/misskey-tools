@@ -1,5 +1,5 @@
-import { getConnection, createConnection, Connection } from 'typeorm';
-import { config } from '../../config.js';
+import {getConnection, createConnection, Connection, DataSource} from 'typeorm';
+import { Config } from '../../config.js';
 import { User } from '../models/entities/user.js';
 import { UsedToken } from '../models/entities/used-token.js';
 import { Announcement } from '../models/entities/announcement.js';
@@ -12,22 +12,11 @@ export const entities = [
 
 /**
  * データベース接続が既に存在すれば取得し、なければ新規作成する
- * @param force 既存の接続があっても新規作成するかどうか
  * @returns 取得または作成したDBコネクション
+ * @param config
  */
-export const initDb = async (force = false): Promise<Connection> => {
-  // forceがtrueでない限り、既に接続が存在する場合はそれを返す
-  if (!force) {
-    try {
-      const conn = getConnection();
-      return Promise.resolve(conn);
-    } catch (e) {
-      // noop
-    }
-  }
-
-  // 接続がないか、forceがtrueの場合は新規作成する
-  return createConnection({
+export function createPostgresDataSource(config: Config) {
+  return new DataSource({
     type: 'postgres',
     host: config.db.host,
     port: config.db.port,
@@ -37,4 +26,4 @@ export const initDb = async (force = false): Promise<Connection> => {
     extra: config.db.extra,
     entities,
   });
-};
+}

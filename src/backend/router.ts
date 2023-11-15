@@ -17,6 +17,8 @@ import { Announcements } from './models/index.js';
 import path from 'path';
 import url from 'url';
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
 const __dirname = path.dirname(url.fileURLToPath(import.meta.url));
 
 export const router = new Router<DefaultState, Context>();
@@ -162,7 +164,7 @@ router.get('/api(.*)', async (ctx, next) => {
 });
 
 router.get('/announcements/:id', async (ctx) => {
-  const a = await Announcements.findOne(ctx.params.id);
+  const a = await Announcements.findOneById(ctx.params.id);
   const stripped = striptags(md.render(a?.body ?? '').replace(/\n/g, ' '));
   await ctx.render('frontend', a ? {
     t: a.title,

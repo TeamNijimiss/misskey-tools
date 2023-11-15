@@ -9,7 +9,7 @@ import { currentTokenVersion } from '../const.js';
 /**
  * IUser インターフェイスに変換します。
  */
-const packUser = (user: User | undefined): IUser | undefined => {
+const packUser = (user: User | null): IUser | undefined => {
   if (!user) return undefined;
   const { username: adminName, host: adminHost } = config.admin;
 
@@ -26,7 +26,7 @@ const packUser = (user: User | undefined): IUser | undefined => {
  * @returns ユーザー
  */
 export const getUser = (username: string, host: string): Promise<IUser | undefined> => {
-  return Users.findOne({ username, host }).then(packUser);
+  return Users.findOneBy({ username, host }).then(packUser);
 };
 
 /**
@@ -50,7 +50,7 @@ export const updateUsersToolsToken = async (user: User | User['id']): Promise<st
  * @returns ユーザー
  */
 export const getUserByToolsToken = (token: string): Promise<IUser | undefined> => {
-  return Users.findOne({ misshaiToken: token }).then(packUser);
+  return Users.findOneBy({ misshaiToken: token }).then(packUser);
 };
 
 /**
