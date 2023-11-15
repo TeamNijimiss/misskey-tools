@@ -72,7 +72,7 @@ const AppInner : React.VFC = () => {
         <p>(C)2020-2023 Shrimpia Network</p>
         <p><span dangerouslySetInnerHTML={{__html: t('disclaimerForMisskeyHq')}} /></p>
         <p>
-          <a href="https://xeltica.notion.site/Misskey-Tools-688187fc85de4b7e901055326c7ffe74" target="_blank" rel="noreferrer noopener">
+          <a href="https://terms.nijimiss.moe/tos" target="_blank" rel="noreferrer noopener">
             {t('termsOfService')}
           </a>
         </p>
