@@ -26,7 +26,7 @@ const packUser = (user: User | null): IUser | undefined => {
  * @returns ユーザー
  */
 export const getUser = (username: string, host: string): Promise<IUser | undefined> => {
-  return Users.findOneBy({ username, host }).then(packUser);
+  return Users.findOneBy({ username: username, host: host }).then(packUser);
 };
 
 /**
